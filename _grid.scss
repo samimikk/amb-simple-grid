@@ -1,0 +1,34 @@
+// --- Simple Grid System ---
+
+@mixin span($width,$margin:$site-gutter,$useRealContainer: false) {
+  $siteRealWidth : $site-container;
+  @if $useRealContainer == true {
+    $siteRealWidth : $site-container-full;
+  } @else if type-of($useRealContainer) == number {
+    $siteRealWidth : $useRealContainer;
+  }
+  
+  @if unit($margin) == 'px' {
+    $margin :  ( $margin / $siteRealWidth ) * 100%;
+  } 
+  
+  width: grid-width($width,$margin,$siteRealWidth);
+  margin-left:  $margin;
+}
+
+@function grid-width($width,$margin:$site-gutter,$useRealContainer: $site-container) {
+  $siteWidth : ( $width  / $useRealContainer ) * 100%;
+  @return  $siteWidth - $margin;
+}
+
+@function span($width,$container: $site-container) {
+  $siteWidth : ( $width  / $container ) * 100%;
+  @return $siteWidth;
+}
+ 
+// Masonry Grids
+@function gridItems($i) {
+  $containerWidth: $site-container - ( 14px *  $i );
+  $gridWidth: $containerWidth / $i; 
+  @return  percentage( $gridWidth /  $site-container);  
+}

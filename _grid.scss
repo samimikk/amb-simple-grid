@@ -28,7 +28,7 @@
  
 // Masonry Grids
 @function gridItems($i) {
-  $containerWidth: $site-container - ( 14px *  $i );
+  $containerWidth: $site-container - ( $site-gutter *  $i );
   $gridWidth: $containerWidth / $i; 
   @return  percentage( $gridWidth /  $site-container);  
 }

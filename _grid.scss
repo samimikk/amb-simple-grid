@@ -1,23 +1,15 @@
 // --- Simple Grid System ---
 
-@mixin span($width,$margin:$site-gutter,$useRealContainer: false) {
-  $siteRealWidth : $site-container;
-  @if $useRealContainer == true {
-    $siteRealWidth : $site-container-full;
-  } @else if type-of($useRealContainer) == number {
-    $siteRealWidth : $useRealContainer;
-  }
-  
+@mixin span($width,$margin:$site-gutter,$siteRealWidth:$site-container) {
   @if unit($margin) == 'px' {
     $margin :  ( $margin / $siteRealWidth ) * 100%;
   } 
-  
   width: grid-width($width,$margin,$siteRealWidth);
   margin-left:  $margin;
 }
 
-@function grid-width($width,$margin:$site-gutter,$useRealContainer: $site-container) {
-  $siteWidth : ( $width  / $useRealContainer ) * 100%;
+@function grid-width($width,$margin:$site-gutter,$siteRealWidth: $site-container) {
+  $siteWidth : ( $width  / $siteRealWidth ) * 100%;
   @return  $siteWidth - $margin;
 }
 
